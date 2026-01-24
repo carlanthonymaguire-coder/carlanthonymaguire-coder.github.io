@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>What Carl Writes</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Full-screen background video -->
+  <video class="bg" autoplay muted loop playsinline preload="auto">
+    <source src="assets/bg.mp4" type="video/mp4" />
+  </video>
+
+  <!-- Subtle dark overlay to help logo pop -->
+  <div class="overlay" aria-hidden="true"></div>
+
+  <!-- Center logo -->
+  <main class="center">
+    <img class="logo" src="assets/logo.png" alt="What Carl Writes" />
+    <p class="hint">Click to enter</p>
+  </main>
+
+  <!-- Click-anywhere hitbox -->
+  <a class="hitbox" href="home/" aria-label="Enter site"></a>
+
+  <!-- Accessibility: reduced motion -->
+  <script>
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      const v = document.querySelector("video.bg");
+      if (v) v.pause();
+    }
+  </script>
+</body>
+</html>
