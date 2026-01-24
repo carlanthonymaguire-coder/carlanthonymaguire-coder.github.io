@@ -57,12 +57,6 @@ html, body { height: 100%; margin: 0; font-family: system-ui, -apple-system, Seg
   cursor: pointer;
 }
 
-@media (max-height: 520px) {
-  .hint { display: none; }
 
-  @media (prefers-reduced-motion: reduce) {
-  .overlay, .center { animation: none; opacity: 1; transform: none; }
-}
-}
 
 
