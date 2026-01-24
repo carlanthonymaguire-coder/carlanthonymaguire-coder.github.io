@@ -51,3 +51,22 @@ html, body { height: 100%; margin: 0; font-family: system-ui, -apple-system, Seg
 @media (max-height: 520px) {
   .hint { display: none; }
 }
+
+@keyframes wcwFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.overlay, .center {
+  opacity: 0;
+  animation: wcwFadeIn 900ms ease-out forwards;
+}
+
+.center {
+  animation-delay: 120ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .overlay, .center { animation: none; opacity: 1; }
+}
+
