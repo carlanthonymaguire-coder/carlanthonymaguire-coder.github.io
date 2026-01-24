@@ -1,3 +1,6 @@
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
 * { box-sizing: border-box; }
 html, body { height: 100%; margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
 
@@ -13,8 +16,11 @@ html, body { height: 100%; margin: 0; font-family: system-ui, -apple-system, Seg
 .overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.35);
+  background: rgba(0,0,0,0.55);
   z-index: 1;
+
+  opacity: 0;
+  animation: fadeIn 900ms ease-out forwards;
 }
 
 .center {
@@ -25,6 +31,9 @@ html, body { height: 100%; margin: 0; font-family: system-ui, -apple-system, Seg
   z-index: 2;
   text-align: center;
   padding: 24px;
+
+  opacity: 0;
+  animation: fadeIn 900ms ease-out 120ms forwards;
 }
 
 .logo {
@@ -51,3 +60,4 @@ html, body { height: 100%; margin: 0; font-family: system-ui, -apple-system, Seg
 @media (max-height: 520px) {
   .hint { display: none; }
 }
+
