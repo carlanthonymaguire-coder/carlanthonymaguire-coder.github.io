@@ -1,13 +1,6 @@
-/* Basic reset */
 * { box-sizing: border-box; }
-html, body {
-  height: 100%;
-  margin: 0;
-  overflow: hidden;
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-}
+html, body { height: 100%; margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
 
-/* Full-screen background video */
 .bg {
   position: fixed;
   inset: 0;
@@ -17,29 +10,13 @@ html, body {
   z-index: 0;
 }
 
-/* Fade animations */
-@keyframes fadeInOverlay {
-  from { opacity: 0; }
-  to   { opacity: 1; }
-}
-
-@keyframes fadeInContent {
-  from { opacity: 0; transform: translateY(8px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-/* Dark overlay */
 .overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.55);
+  background: rgba(0,0,0,0.35);
   z-index: 1;
-
-  opacity: 0;
-  animation: fadeInOverlay 900ms ease-out forwards;
 }
 
-/* Centered logo/content */
 .center {
   position: fixed;
   inset: 0;
@@ -48,9 +25,6 @@ html, body {
   z-index: 2;
   text-align: center;
   padding: 24px;
-
-  opacity: 0;
-  animation: fadeInContent 900ms ease-out 120ms forwards;
 }
 
 .logo {
@@ -67,7 +41,6 @@ html, body {
   color: rgba(255,255,255,0.75);
 }
 
-/* Click-anywhere */
 .hitbox {
   position: fixed;
   inset: 0;
@@ -75,16 +48,6 @@ html, body {
   cursor: pointer;
 }
 
-/* Hide hint on short screens */
 @media (max-height: 520px) {
   .hint { display: none; }
-}
-
-/* Respect reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  .overlay, .center {
-    animation: none;
-    opacity: 1;
-    transform: none;
-  }
 }
