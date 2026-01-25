@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Short stories — What Carl Writes</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <video class="bg" autoplay muted loop playsinline preload="auto" poster="/assets/bg-poster.jpg">
+    <source src="/assets/bg.mp4" type="video/mp4" />
+  </video>
+  <div class="overlay" aria-hidden="true"></div>
+
+  <div class="page">
+    <header class="nav">
+      <div class="nav-inner">
+        <a class="brand" href="/home/">
+          <img src="/assets/logo.png" alt="" aria-hidden="true" />
+          <span>What Carl Writes</span>
+        </a>
+        <nav class="nav-links" aria-label="Primary">
+          <a href="/poetry/">Poetry</a>
+          <a href="/short-stories/">Short Stories</a>
+          <a href="/flash-fiction/">Flash Fiction</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="main">
+      <section class="hero">
+        <h1>Short stories</h1>
+        <p>Add your poems here. You can format each poem as a card, or as a list linking to individual pages.</p>
+      </section>
+
+      <section class="grid">
+        <article class="card">
+          <h2>Coming soon</h2>
+          <p>First poem title — short excerpt — date.</p>
+        </article>
+        <article class="card">
+          <h2>Coming soon</h2>
+          <p>Second poem title — short excerpt — date.</p>
+        </article>
+      </section>
+    </main>
+
+    <footer class="footer">© <span id="year"></span> What Carl Writes.</footer>
+  </div>
+
+  <script>
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      const v = document.querySelector("video.bg"); if (v) v.pause();
+    }
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
