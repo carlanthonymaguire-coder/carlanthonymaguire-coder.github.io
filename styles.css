@@ -1,3 +1,5 @@
+body { outline: 10px solid hotpink !important; }
+
 /* Base reset */
 * { box-sizing: border-box; }
 html, body {
@@ -252,3 +254,4 @@ button:focus-visible {
   cursor: pointer;
   background: transparent;
 }
+
