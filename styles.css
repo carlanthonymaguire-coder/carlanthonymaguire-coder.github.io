@@ -219,3 +219,36 @@ button:focus-visible {
   .bg { display: none; } /* fallback to background color + overlay */
   .overlay { background: rgba(0,0,0,0.45); }
 }
+
+/* --- Splash page (index.html) styles --- */
+.center {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  z-index: 2;
+  text-align: center;
+  padding: 24px;
+}
+
+.logo {
+  width: min(520px, 80vw);
+  height: auto;
+  filter: drop-shadow(0 10px 30px rgba(0,0,0,0.45));
+}
+
+.hint {
+  margin-top: 14px;
+  font-size: 14px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.75);
+}
+
+.hitbox {
+  position: fixed;
+  inset: 0;
+  z-index: 3;
+  cursor: pointer;
+  background: transparent;
+}
