@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>What Carl Writes — Home</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <video class="bg" autoplay muted loop playsinline preload="auto" poster="/assets/bg-poster.jpg">
+    <source src="/assets/bg.mp4" type="video/mp4" />
+  </video>
+  <div class="overlay" aria-hidden="true"></div>
+
+  <div class="page">
+    <header class="nav">
+      <div class="nav-inner">
+        <a class="brand" href="/home/">
+          <img src="/assets/logo.png" alt="" aria-hidden="true" />
+          <span>What Carl Writes</span>
+        </a>
+
+        <nav class="nav-links" aria-label="Primary">
+          <a href="/poetry/">Poetry</a>
+          <a href="/short-stories/">Short Stories</a>
+          <a href="/flash-fiction/">Flash Fiction</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="main">
+      <section class="hero" aria-label="About the author">
+        <h1>About the author</h1>
+        <p>
+          I write mythic fantasy, dark folklore, and short pieces with a hint of the uncanny.
+          Here you’ll find poetry, short stories, and flash fiction — plus the occasional work-in-progress.
+        </p>
+      </section>
+
+      <section class="grid" aria-label="Details and contact">
+        <article class="card">
+          <h2>Latest</h2>
+          <p>
+            Add a short intro here about what you’re working on right now — a new story, a submission, a project update.
+          </p>
+          <p>
+            You can also add links to your favourite pieces on each page once you’ve posted them.
+          </p>
+        </article>
+
+        <aside class="card">
+          <h2>Contact</h2>
+
+          <!-- Static sites can’t send email without a service.
+               Option 1: use Formspree (replace the action URL with your Formspree form endpoint)
+               Option 2: replace the whole form with a mailto link -->
+          <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+            <div>
+              <label for="name">Name</label>
+              <input id="name" name="name" autocomplete="name" required />
+            </div>
+
+            <div>
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" autocomplete="email" required />
+            </div>
+
+            <div>
+              <label for="message">Message</label>
+              <textarea id="message" name="message" required></textarea>
+            </div>
+
+            <button type="submit">Send</button>
+          </form>
+
+          <p style="margin-top:12px; font-size:13px; color:rgba(255,255,255,0.70);">
+            Prefer email? Add a mail link here: <a href="mailto:you@example.com" style="color:rgba(255,255,255,0.85);">you@example.com</a>
+          </p>
+        </aside>
+      </section>
+    </main>
+
+    <footer class="footer">
+      © <span id="year"></span> What Carl Writes. All rights reserved.
+    </footer>
+  </div>
+
+  <script>
+    // Reduced motion: pause video if user prefers less motion
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      const v = document.querySelector("video.bg");
+      if (v) v.pause();
+    }
+    // Footer year
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
