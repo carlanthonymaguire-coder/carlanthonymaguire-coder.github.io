@@ -7,39 +7,8 @@
   <link rel="stylesheet" href="/styles.css" />
 </head>
 
-  <script>
-(() => {
-  const nav = document.querySelector(".nav");
-  if (!nav) return;
-
-  let lastY = window.scrollY;
-  const COMPACT_AT = 24;   // start shrinking after this
-  const HIDE_AT = 140;     // hide header after this when scrolling down
-
-  const onScroll = () => {
-    const y = window.scrollY;
-    const goingDown = y > lastY;
-
-    nav.classList.toggle("is-compact", y > COMPACT_AT);
-
-    if (y < HIDE_AT) {
-      nav.classList.remove("is-hidden");
-    } else if (goingDown) {
-      nav.classList.add("is-hidden");
-    } else {
-      nav.classList.remove("is-hidden");
-    }
-
-    lastY = y;
-  };
-
-  onScroll();
-  window.addEventListener("scroll", onScroll, { passive: true });
-})();
-</script>
-  
 <body>
-  <video class="bg" autoplay muted loop playsinline preload="auto" poster="/assets/bg-poster.jpg">
+  <video class="bg" autoplay muted loop playsinline preload="metadata" poster="/assets/bg-poster.jpg">
     <source src="/assets/bg.mp4" type="video/mp4" />
   </video>
   <div class="overlay" aria-hidden="true"></div>
@@ -60,27 +29,26 @@
       </div>
     </header>
 
-   <main class="main">
-  <section class="hero" aria-label="About the author">
-    <div class="about">
-      <div class="about-text">
-        <h1>About the author</h1>
-        <p>
-          Carl Maguire writes speculative fiction, often underpinned by folklore and mythology. 
-          His poetry spans darker work exploring mental health, as well as lighter pieces on
-          childhood, family, belonging, and identity. His poem, The Life Cycle of an Acorn
-          Seedling, was long-listed for the November 2025 Tadpole Press 100-word Writing
-          Contest, and his flash fiction piece, No Stairway to Heaven, placed 4th in the
-          Globe Soup October 2025 Micro Competition.
-        </p>
-      </div>
+    <main class="main">
+      <section class="hero" aria-label="About the author">
+        <div class="about">
+          <div class="about-text">
+            <h1>About the author</h1>
+            <p>
+              Carl Maguire writes speculative fiction, often underpinned by folklore and mythology.
+              His poetry spans darker work exploring mental health, as well as lighter pieces on
+              childhood, family, belonging, and identity. His poem, The Life Cycle of an Acorn
+              Seedling, was long-listed for the November 2025 Tadpole Press 100-word Writing
+              Contest, and his flash fiction piece, No Stairway to Heaven, placed 4th in the
+              Globe Soup October 2025 Micro Competition.
+            </p>
+          </div>
 
-      <figure class="about-photo">
-        <img src="/assets/author.jpg" alt="Carl Maguire" />
-      </figure>
-    </div>
-  </section>
-</main>
+          <figure class="about-photo">
+            <img src="/assets/author.jpg" alt="Carl Maguire" />
+          </figure>
+        </div>
+      </section>
 
       <section class="grid" aria-label="Details and contact">
         <article class="card">
@@ -96,9 +64,6 @@
         <aside class="card">
           <h2>Contact</h2>
 
-          <!-- Static sites can’t send email without a service.
-               Option 1: use Formspree (replace the action URL with your Formspree form endpoint)
-               Option 2: replace the whole form with a mailto link -->
           <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
             <div>
               <label for="name">Name</label>
@@ -119,7 +84,8 @@
           </form>
 
           <p style="margin-top:12px; font-size:13px; color:rgba(255,255,255,0.70);">
-            Prefer email? Add a mail link here: <a href="mailto:you@example.com" style="color:rgba(255,255,255,0.85);">you@example.com</a>
+            Prefer email? Add a mail link here:
+            <a href="mailto:you@example.com" style="color:rgba(255,255,255,0.85);">you@example.com</a>
           </p>
         </aside>
       </section>
@@ -136,13 +102,39 @@
       const v = document.querySelector("video.bg");
       if (v) v.pause();
     }
+
     // Footer year
     document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Header: compact then hide on scroll down, show on scroll up
+    (() => {
+      const nav = document.querySelector(".nav");
+      if (!nav) return;
+
+      let lastY = window.scrollY;
+      const COMPACT_AT = 24;
+      const HIDE_AT = 140;
+
+      const onScroll = () => {
+        const y = window.scrollY;
+        const goingDown = y > lastY;
+
+        nav.classList.toggle("is-compact", y > COMPACT_AT);
+
+        if (y < HIDE_AT) {
+          nav.classList.remove("is-hidden");
+        } else if (goingDown) {
+          nav.classList.add("is-hidden");
+        } else {
+          nav.classList.remove("is-hidden");
+        }
+
+        lastY = y;
+      };
+
+      onScroll();
+      window.addEventListener("scroll", onScroll, { passive: true });
+    })();
   </script>
 </body>
 </html>
-
-
-
-
-
