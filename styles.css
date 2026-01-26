@@ -38,12 +38,56 @@ html, body {
   flex-direction: column;
 }
 
-/* Top nav */
+/* Top nav (header that disappears after a bit of scrolling) */
 .nav {
   position: sticky;
   top: 0;
   z-index: 3;
+
+  /* look more like a real header */
+  background: rgba(0,0,0,0.22);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+
+  /* sizing */
   padding: 18px 18px 10px;
+
+  /* allow smooth collapse */
+  overflow: hidden;
+  max-height: 120px; /* big enough for your header contents */
+
+  /* transitions */
+  transition:
+    max-height 240ms ease,
+    padding 240ms ease,
+    background 240ms ease,
+    box-shadow 240ms ease,
+    border-color 240ms ease,
+    opacity 240ms ease;
+}
+
+/* blur when supported */
+@supports (backdrop-filter: blur(8px)) {
+  .nav {
+    backdrop-filter: blur(8px);
+  }
+}
+
+/* Compact style once user scrolls a little */
+.nav.is-compact {
+  padding: 10px 18px 8px;
+  background: rgba(0,0,0,0.30);
+}
+
+/* Hidden style after scrolling down past threshold */
+.nav.is-hidden {
+  max-height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  opacity: 0;
+  border-color: transparent;
+  box-shadow: none;
+  pointer-events: none;
 }
 
 .nav-inner {
@@ -215,10 +259,12 @@ button:focus-visible {
 }
 
 /* Reduced motion */
-@media (prefers-re reduce) {
-  /* Keep the element so the poster can show */
+@media (prefers-reduced-motion: reduce) {
   .bg { display: block; }
   .overlay { background: rgba(0,0,0,0.45); }
+
+  /* avoid animated header changes */
+  .nav { transition: none; }
 }
 
 /* --- Splash page (index.html) styles --- */
@@ -283,3 +329,4 @@ button:focus-visible {
     max-width: 260px;
   }
 }
+
