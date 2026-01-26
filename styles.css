@@ -216,9 +216,9 @@ button:focus-visible {
 
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
-  .bg { display: none; } /* fallback to background color + overlay */
+  /* Keep the element so the poster can show */
+  .bg { display: block; }
   .overlay { background: rgba(0,0,0,0.45); }
-}
 
 /* --- Splash page (index.html) styles --- */
 .center {
@@ -281,4 +281,5 @@ button:focus-visible {
     max-width: 260px;
   }
 }
+
 
