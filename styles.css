@@ -215,10 +215,11 @@ button:focus-visible {
 }
 
 /* Reduced motion */
-@media (prefers-reduced-motion: reduce) {
+@media (prefers-re reduce) {
   /* Keep the element so the poster can show */
   .bg { display: block; }
   .overlay { background: rgba(0,0,0,0.45); }
+}
 
 /* --- Splash page (index.html) styles --- */
 .center {
@@ -253,6 +254,7 @@ button:focus-visible {
   background: transparent;
 }
 
+/* About section photo layout */
 .about{
   display: grid;
   grid-template-columns: 1fr 220px;
@@ -281,5 +283,3 @@ button:focus-visible {
     max-width: 260px;
   }
 }
-
-
