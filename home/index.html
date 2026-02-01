@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>What Carl Writes — Home</title>
-  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="/styles.css?v=2" />
 </head>
 
 <body>
@@ -59,45 +59,29 @@
           <p>
             You can also add links to your favourite pieces on each page once you’ve posted them.
           </p>
+
+          <p id="thanks" style="display:none; margin-top:14px; color: rgba(255,255,255,0.80);">
+            Thanks — your message has been sent.
+          </p>
         </article>
 
         <aside class="card">
           <h2>Contact</h2>
 
           <form action="https://formspree.io/f/xqelbdvj" method="POST">
+            <input type="hidden" name="_subject" value="New message from whatcarlwrites.com">
+            <input type="hidden" name="_redirect" value="https://www.whatcarlwrites.com/home/#thanks">
+
+            <!-- Honeypot (spam trap) -->
+            <label class="hp" aria-hidden="true">
+              Don’t fill this out:
+              <input name="_gotcha" tabindex="-1" autocomplete="off">
+            </label>
+
             <div>
               <label for="name">Name</label>
               <input id="name" name="name" autocomplete="name" required />
             </div>
-
-            <form action="https://formspree.io/f/abcdwxyz" method="POST">
-  <input type="hidden" name="_subject" value="New message from whatcarlwrites.com">
-  <input type="hidden" name="_redirect" value="https://www.whatcarlwrites.com/home/#thanks">
-
-  <!-- Honeypot (spam trap) -->
-  <label class="hp" aria-hidden="true">
-    Don’t fill this out:
-    <input name="_gotcha" tabindex="-1" autocomplete="off">
-  </label>
-
-  <div>
-    <label for="name">Name</label>
-    <input id="name" name="name" autocomplete="name" required />
-  </div>
-
-  <div>
-    <label for="email">Email</label>
-    <input id="email" name="email" type="email" autocomplete="email" required />
-  </div>
-
-  <div>
-    <label for="message">Message</label>
-    <textarea id="message" name="message" required></textarea>
-  </div>
-
-  <button type="submit">Send</button>
-</form>
-
 
             <div>
               <label for="email">Email</label>
@@ -126,45 +110,48 @@
   </div>
 
   <script>
-    // Reduced motion: pause video if user prefers less motion
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    window.addEventListener("DOMContentLoaded", () => {
+      // Reduced motion / autoplay fallback for background video
       const v = document.querySelector("video.bg");
-      if (v) v.pause();
-    }
+      if (v) {
+        const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        if (reduce) v.pause();
+        else v.play().catch(() => {});
+      }
 
-    // Footer year
-    document.getElementById("year").textContent = new Date().getFullYear();
+      // Footer year
+      document.getElementById("year").textContent = new Date().getFullYear();
 
-    // Header: compact then hide on scroll down, show on scroll up
-    (() => {
+      // Show thanks message after redirect
+      if (location.hash === "#thanks") {
+        const el = document.getElementById("thanks");
+        if (el) el.style.display = "block";
+      }
+
+      // Header: compact then hide on scroll down, show on scroll up
       const nav = document.querySelector(".nav");
-      if (!nav) return;
+      if (nav) {
+        let lastY = window.scrollY;
+        const COMPACT_AT = 24;
+        const HIDE_AT = 140;
 
-      let lastY = window.scrollY;
-      const COMPACT_AT = 24;
-      const HIDE_AT = 140;
+        const onScroll = () => {
+          const y = window.scrollY;
+          const goingDown = y > lastY;
 
-      const onScroll = () => {
-        const y = window.scrollY;
-        const goingDown = y > lastY;
+          nav.classList.toggle("is-compact", y > COMPACT_AT);
 
-        nav.classList.toggle("is-compact", y > COMPACT_AT);
+          if (y < HIDE_AT) nav.classList.remove("is-hidden");
+          else if (goingDown) nav.classList.add("is-hidden");
+          else nav.classList.remove("is-hidden");
 
-        if (y < HIDE_AT) {
-          nav.classList.remove("is-hidden");
-        } else if (goingDown) {
-          nav.classList.add("is-hidden");
-        } else {
-          nav.classList.remove("is-hidden");
-        }
+          lastY = y;
+        };
 
-        lastY = y;
-      };
-
-      onScroll();
-      window.addEventListener("scroll", onScroll, { passive: true });
-    })();
+        onScroll();
+        window.addEventListener("scroll", onScroll, { passive: true });
+      }
+    });
   </script>
 </body>
 </html>
-
