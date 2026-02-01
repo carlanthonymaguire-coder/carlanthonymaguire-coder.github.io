@@ -4,11 +4,10 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>What Carl Writes</title>
-  <link rel="stylesheet" href="styles.css?v=2" />
+  <link rel="stylesheet" href="/styles.css?v=2" />
 </head>
 <body>
-  <video class="bg" autoplay muted loop playsinline preload="metadata"
-         poster="/assets/bg-poster.jpg">
+  <video class="bg" autoplay muted loop playsinline preload="metadata" poster="/assets/bg-poster.jpg">
     <source src="/assets/bg.mp4" type="video/mp4" />
   </video>
 
@@ -22,10 +21,19 @@
   <a class="hitbox" href="/home/" aria-label="Enter site"></a>
 
   <script>
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    window.addEventListener("DOMContentLoaded", () => {
       const v = document.querySelector("video.bg");
-      if (v) v.pause();
-    }
+      if (!v) return;
+
+      const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (reduce) {
+        v.pause(); // poster stays visible
+        return;
+      }
+
+      // Attempt play; if autoplay is blocked, poster remains visible
+      v.play().catch(() => {});
+    });
   </script>
 </body>
 </html>
