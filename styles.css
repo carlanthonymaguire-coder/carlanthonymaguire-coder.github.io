@@ -208,6 +208,9 @@ form {
   gap: 10px;
 }
 
+/* Formspree honeypot (spam trap) — keep hidden */
+.hp { display: none !important; }
+
 label {
   font-size: 13px;
   color: rgba(255,255,255,0.78);
@@ -329,4 +332,5 @@ button:focus-visible {
     max-width: 260px;
   }
 }
+
 
