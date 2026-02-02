@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Flash Fiction — What Carl Writes</title>
-  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="/styles.css?v=2" />
 </head>
 
 <body>
@@ -31,14 +31,23 @@
     <main class="main">
       <section class="hero">
         <h1>Flash fiction</h1>
-        <p>Add your flash fiction here — as cards below, or as links to individual pages.</p>
+        <p>Micro-stories and flash pieces — short, sharp, and (sometimes) unsettling.</p>
       </section>
 
-      <section class="grid">
+      <section class="grid" aria-label="Flash fiction list">
         <article class="card">
-          <h2>Coming soon</h2>
-          <p>Title — short excerpt — date.</p>
+          <h2>No Stairway to Heaven</h2>
+          <p style="opacity:0.85;">
+            Published: 1 November 2025 • 100-word micro • 4th place (Globe Soup “Ladder”)
+          </p>
+          <p>
+            <a href="https://www.globesoup.net/ladder" target="_blank" rel="noopener"
+               style="color: rgba(255,255,255,0.88); text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.25); padding-bottom: 2px;">
+              Read on Globe Soup →
+            </a>
+          </p>
         </article>
+
         <article class="card">
           <h2>Coming soon</h2>
           <p>Title — short excerpt — date.</p>
@@ -50,44 +59,42 @@
   </div>
 
   <script>
-    // Reduced motion: pause video if user prefers less motion
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    window.addEventListener("DOMContentLoaded", () => {
+      // Reduced motion / autoplay fallback for background video
       const v = document.querySelector("video.bg");
-      if (v) v.pause();
-    }
+      if (v) {
+        const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        if (reduce) v.pause();
+        else v.play().catch(() => {});
+      }
 
-    // Footer year
-    document.getElementById("year").textContent = new Date().getFullYear();
+      // Footer year
+      document.getElementById("year").textContent = new Date().getFullYear();
 
-    // Header: compact then hide on scroll down, show on scroll up
-    (() => {
+      // Header: compact then hide on scroll down, show on scroll up
       const nav = document.querySelector(".nav");
-      if (!nav) return;
+      if (nav) {
+        let lastY = window.scrollY;
+        const COMPACT_AT = 24;
+        const HIDE_AT = 140;
 
-      let lastY = window.scrollY;
-      const COMPACT_AT = 24;
-      const HIDE_AT = 140;
+        const onScroll = () => {
+          const y = window.scrollY;
+          const goingDown = y > lastY;
 
-      const onScroll = () => {
-        const y = window.scrollY;
-        const goingDown = y > lastY;
+          nav.classList.toggle("is-compact", y > COMPACT_AT);
 
-        nav.classList.toggle("is-compact", y > COMPACT_AT);
+          if (y < HIDE_AT) nav.classList.remove("is-hidden");
+          else if (goingDown) nav.classList.add("is-hidden");
+          else nav.classList.remove("is-hidden");
 
-        if (y < HIDE_AT) {
-          nav.classList.remove("is-hidden");
-        } else if (goingDown) {
-          nav.classList.add("is-hidden");
-        } else {
-          nav.classList.remove("is-hidden");
-        }
+          lastY = y;
+        };
 
-        lastY = y;
-      };
-
-      onScroll();
-      window.addEventListener("scroll", onScroll, { passive: true });
-    })();
+        onScroll();
+        window.addEventListener("scroll", onScroll, { passive: true });
+      }
+    });
   </script>
 </body>
 </html>
