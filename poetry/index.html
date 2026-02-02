@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Poetry — What Carl Writes</title>
-  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="/styles.css?v=2" />
 </head>
 
 <body>
@@ -32,17 +32,76 @@
     <main class="main">
       <section class="hero">
         <h1>Poetry</h1>
-        <p>Add your poems here — as cards below, or as links to individual poem pages.</p>
+        <p>
+          A growing selection of poems—dark work circling mental health and insomnia, alongside pieces on memory,
+          belonging, and Irish identity. I’m currently formatting these for the site; more will appear here soon.
+        </p>
       </section>
 
-      <section class="grid">
+      <section class="grid" aria-label="Poems list">
         <article class="card">
-          <h2>Coming soon</h2>
-          <p>Title — short excerpt — date.</p>
+          <h2>The Life Cycle of an Acorn Seedling</h2>
+          <p style="opacity:0.85;">Longlisted — Tadpole Press 100-Word Writing Contest (Nov 2025)</p>
+          <p style="opacity:0.85; font-style: italic; margin-top: 10px;">
+            “Like tiny acorns, your truths fruit upon the oak…”
+          </p>
+          <p style="margin-top: 12px; opacity:0.80;">
+            Full text coming soon.
+          </p>
         </article>
+
         <article class="card">
-          <h2>Coming soon</h2>
-          <p>Title — short excerpt — date.</p>
+          <h2>Intrusive Thoughts</h2>
+          <p style="opacity:0.85;">In progress</p>
+          <p style="opacity:0.85; font-style: italic; margin-top: 10px;">
+            “With deliberate care, I wash the knife…”
+          </p>
+          <p style="margin-top: 12px; opacity:0.80;">Full text coming soon.</p>
+        </article>
+
+        <article class="card">
+          <h2>Night Terrors</h2>
+          <p style="opacity:0.85;">In progress</p>
+          <p style="opacity:0.85; font-style: italic; margin-top: 10px;">
+            “It’s 3:00am. I should sleep…”
+          </p>
+          <p style="margin-top: 12px; opacity:0.80;">Full text coming soon.</p>
+        </article>
+
+        <article class="card">
+          <h2>Overload</h2>
+          <p style="opacity:0.85;">In progress</p>
+          <p style="opacity:0.85; font-style: italic; margin-top: 10px;">
+            “There’s a pressure in my head; it thumps behind my eyes…”
+          </p>
+          <p style="margin-top: 12px; opacity:0.80;">Full text coming soon.</p>
+        </article>
+
+        <article class="card">
+          <h2>Guardian Angel</h2>
+          <p style="opacity:0.85;">In progress</p>
+          <p style="opacity:0.85; font-style: italic; margin-top: 10px;">
+            “The scream slips into the silence in the corners of the room…”
+          </p>
+          <p style="margin-top: 12px; opacity:0.80;">Full text coming soon.</p>
+        </article>
+
+        <article class="card">
+          <h2>The Emigrant’s Conundrum</h2>
+          <p style="opacity:0.85;">In progress</p>
+          <p style="opacity:0.85; font-style: italic; margin-top: 10px;">
+            “There crouches the suitcase; it gathers dust in the corner…”
+          </p>
+          <p style="margin-top: 12px; opacity:0.80;">Full text coming soon.</p>
+        </article>
+
+        <article class="card">
+          <h2>Stories</h2>
+          <p style="opacity:0.85;">In progress</p>
+          <p style="opacity:0.85; font-style: italic; margin-top: 10px;">
+            “A dark and stormy night— that’s how they always started…”
+          </p>
+          <p style="margin-top: 12px; opacity:0.80;">Full text coming soon.</p>
         </article>
       </section>
     </main>
@@ -51,44 +110,42 @@
   </div>
 
   <script>
-    // Reduced motion: pause video if user prefers less motion
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    window.addEventListener("DOMContentLoaded", () => {
+      // Reduced motion / autoplay fallback
       const v = document.querySelector("video.bg");
-      if (v) v.pause();
-    }
+      if (v) {
+        const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        if (reduce) v.pause();
+        else v.play().catch(() => {});
+      }
 
-    // Footer year
-    document.getElementById("year").textContent = new Date().getFullYear();
+      // Footer year
+      document.getElementById("year").textContent = new Date().getFullYear();
 
-    // Header: compact then hide on scroll down, show on scroll up
-    (() => {
+      // Header: compact then hide on scroll down, show on scroll up
       const nav = document.querySelector(".nav");
-      if (!nav) return;
+      if (nav) {
+        let lastY = window.scrollY;
+        const COMPACT_AT = 24;
+        const HIDE_AT = 140;
 
-      let lastY = window.scrollY;
-      const COMPACT_AT = 24;
-      const HIDE_AT = 140;
+        const onScroll = () => {
+          const y = window.scrollY;
+          const goingDown = y > lastY;
 
-      const onScroll = () => {
-        const y = window.scrollY;
-        const goingDown = y > lastY;
+          nav.classList.toggle("is-compact", y > COMPACT_AT);
 
-        nav.classList.toggle("is-compact", y > COMPACT_AT);
+          if (y < HIDE_AT) nav.classList.remove("is-hidden");
+          else if (goingDown) nav.classList.add("is-hidden");
+          else nav.classList.remove("is-hidden");
 
-        if (y < HIDE_AT) {
-          nav.classList.remove("is-hidden");
-        } else if (goingDown) {
-          nav.classList.add("is-hidden");
-        } else {
-          nav.classList.remove("is-hidden");
-        }
+          lastY = y;
+        };
 
-        lastY = y;
-      };
-
-      onScroll();
-      window.addEventListener("scroll", onScroll, { passive: true });
-    })();
+        onScroll();
+        window.addEventListener("scroll", onScroll, { passive: true });
+      }
+    });
   </script>
 </body>
 </html>
