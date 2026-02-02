@@ -137,3 +137,16 @@
           nav.classList.toggle("is-compact", y > COMPACT_AT);
 
           if (y < HIDE_AT) nav.classList.remove("is-hidden");
+          else if (goingDown) nav.classList.add("is-hidden");
+          else nav.classList.remove("is-hidden");
+
+          lastY = y;
+        };
+
+        onScroll();
+        window.addEventListener("scroll", onScroll, { passive: true });
+      }
+    });
+  </script>
+</body>
+</html>
